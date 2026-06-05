@@ -1,4 +1,4 @@
-// auth.js — Passwort-Hashing und Session-Verwaltung
+//Passwort-Hashing und Session-Verwaltung
 import pool from './database.js';
 import bcrypt from 'bcrypt';
 import { randomUUID } from 'crypto';
