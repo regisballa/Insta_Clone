@@ -21,6 +21,19 @@
                     Die Community-Favoriten — nach Votes sortiert.
                 </p>
             </div>
+            
+            {#if !data?.user}
+                <div class="flex flex-col gap-3 sm:items-end">
+                    <a href="/register"
+                       class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors text-sm text-center shadow-sm">
+                        Jetzt mitmachen
+                    </a>
+                    <a href="/login"
+                       class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium px-6 py-3 rounded-xl transition-colors text-sm text-center">
+                        Einloggen
+                    </a>
+                </div>
+            {/if}
         </div>
     </div>
 </section>
