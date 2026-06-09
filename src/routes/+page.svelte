@@ -66,6 +66,63 @@
             </div>
 
             {:else}
+            
+            <!-- Top 3 -->
+            {#if topImages.length > 0}
+                <div class="mb-10">
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+                        <h2 class="text-xs font-bold text-slate-500 uppercase tracking-widest">Top Bilder</h2>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        {#each topImages as image, i (image.id)}
+                            <a href="/image/{image.id}"
+                               class="group relative overflow-hidden rounded-2xl bg-slate-200 block shadow-sm
+                                      {i === 0 ? 'sm:row-span-2' : ''}">
+
+                                <img src={image.image}
+                                     alt={image.description ?? 'Bild'}
+                                     class="w-full {i === 0 ? 'h-72 sm:h-full' : 'h-52'} object-cover
+                                            transition-transform duration-500 group-hover:scale-105" />
+
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent
+                                            opacity-70 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                                <!-- Rang Badge + NEU Badge nebeneinander -->
+                                <div class="absolute top-3 left-3 flex gap-1.5">
+                                    {#if i === 0}
+                                        <span class="bg-amber-400 text-amber-900 text-xs font-bold px-2.5 py-1 rounded-full shadow">#1</span>
+                                    {:else if i === 1}
+                                        <span class="bg-slate-200 text-slate-700 text-xs font-bold px-2.5 py-1 rounded-full shadow">#2</span>
+                                    {:else}
+                                        <span class="bg-orange-200 text-orange-800 text-xs font-bold px-2.5 py-1 rounded-full shadow">#3</span>
+                                    {/if}
+
+                                    <!-- NEU Badge — nur wenn Bild < 24h alt -->
+                                    {#if isNew(image.created_at)}
+                                        <span class="bg-green-500 text-white text-xs font-bold px-2.5 py-1 rounded-full shadow animate-pulse">
+                                            NEU
+                                        </span>
+                                    {/if}
+                                </div>
+
+                                <div class="absolute bottom-0 left-0 right-0 p-4">
+                                    {#if image.description}
+                                        <p class="text-white text-sm font-semibold truncate mb-1">{image.description}</p>
+                                    {/if}
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white/70 text-xs">@{image.username}</span>
+                                        <span class="text-amber-300 text-xs font-bold bg-black/30 px-2 py-0.5 rounded-full">
+                                            ▲ {image.votes}
+                                        </span>
+                                    </div>
+                                </div>
+                            </a>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
         {/if}
     </div>
 </div>
