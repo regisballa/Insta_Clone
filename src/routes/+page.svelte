@@ -6,6 +6,11 @@
     const topImages = images.slice(0, 3);
     const restImages = images.slice(3);
 
+    // Prüft ob ein Bild weniger als 24 Stunden alt ist
+    function isNew(createdAt) {
+        const diff = Date.now() - new Date(createdAt).getTime();
+        return diff < 24 * 60 * 60 * 1000;
+    }
 </script>
 
 <section class="bg-white border-b border-slate-200">
@@ -116,6 +121,48 @@
                                         <span class="text-amber-300 text-xs font-bold bg-black/30 px-2 py-0.5 rounded-full">
                                             ▲ {image.votes}
                                         </span>
+                                    </div>
+                                </div>
+                            </a>
+                        {/each}
+                    </div>
+                </div>
+            {/if}
+           
+            <!-- Rest der Bilder -->
+            {#if restImages.length > 0}
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <span class="w-2 h-2 rounded-full bg-slate-300"></span>
+                        <h2 class="text-xs font-bold text-slate-400 uppercase tracking-widest">Alle Bilder</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                        {#each restImages as image (image.id)}
+                            <a href="/image/{image.id}"
+                               class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 block shadow-sm">
+
+                                <img src={image.image}
+                                     alt={image.description ?? 'Bild'}
+                                     class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+
+                                <!-- NEU Badge oben links -->
+                                {#if isNew(image.created_at)}
+                                    <div class="absolute top-2 left-2">
+                                        <span class="bg-green-500 text-white text-xs font-bold px-2 py-0.5 rounded-full shadow animate-pulse">
+                                            NEU
+                                        </span>
+                                    </div>
+                                {/if}
+
+                                <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
+                                            transition-opacity duration-200 flex flex-col justify-end p-3">
+                                    {#if image.description}
+                                        <p class="text-white text-xs font-medium truncate mb-1">{image.description}</p>
+                                    {/if}
+                                    <div class="flex items-center justify-between">
+                                        <span class="text-white/70 text-xs">@{image.username}</span>
+                                        <span class="text-amber-300 text-xs font-bold">▲ {image.votes}</span>
                                     </div>
                                 </div>
                             </a>
