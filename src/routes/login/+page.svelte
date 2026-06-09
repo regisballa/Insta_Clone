@@ -1,6 +1,5 @@
 <script>
     let { form } = $props();
-    
     // Svelte 5 State für die Passwort-Sichtbarkeit
     let showPassword = $state(false);
 </script>
@@ -8,11 +7,6 @@
 <div class="min-h-screen flex items-center justify-center bg-slate-100 p-5 antialiased font-sans">
 
     <div class="relative bg-white px-8 py-12 sm:px-10 w-full max-w-[450px] rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
-        
-        <div class="absolute w-[200px] h-[200px] top-0 right-0 z-0 pointer-events-none opacity-20">
-            <div class="absolute -top-24 -right-24 w-48 h-48 bg-indigo-500 rounded-full blur-2xl animate-pulse"></div>
-            <div class="absolute -top-20 -right-16 w-36 h-36 bg-purple-500 rounded-full blur-2xl animate-pulse delay-75"></div>
-        </div>
 
         <div class="relative z-10 mb-10">
             <p class="text-slate-400 text-sm font-medium">Please enter your details</p>
