@@ -18,5 +18,28 @@
                 <p class="text-slate-400 text-sm mt-0.5">{data.images.length} Bilder</p>
             </div>
         </div>
+
+        <!-- Bilder-Grid -->
+        {#if data.images.length === 0}
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm text-center py-20 px-8">
+                <p class="text-slate-400 text-sm">Noch keine Bilder hochgeladen.</p>
+            </div>
+        {:else}
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {#each data.images as image (image.id)}
+                    <a href="/image/{image.id}"
+                       class="group relative aspect-square overflow-hidden rounded-xl bg-slate-200 block shadow-sm">
+                        <img src={image.image}
+                             alt={image.description ?? 'Bild'}
+                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                        <!-- Hover-Overlay mit Vote-Anzahl -->
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
+                                    transition-opacity duration-200 flex items-end p-3">
+                            <span class="text-amber-300 text-xs font-bold">▲ {image.votes}</span>
+                        </div>
+                    </a>
+                {/each}
+            </div>
+        {/if}
     </div>
 </div>
