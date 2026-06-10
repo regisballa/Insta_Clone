@@ -24,4 +24,15 @@ export const actions = {
             }
             return fail(500, { error: 'Registrierung fehlgeschlagen. Bitte erneut versuchen.' });
         }
+                // Session erstellen und Cookie setzen
+        const sessionId = await createSession(result.insertId);
+        cookies.set('session', sessionId, {
+            path: '/',
+            httpOnly: true,
+            sameSite: 'strict',
+            maxAge: 60 * 60 * 24 * 30
+        });
+
+        throw redirect(303, '/');
+    }
 };
