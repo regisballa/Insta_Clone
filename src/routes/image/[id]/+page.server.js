@@ -21,8 +21,7 @@ export async function load({ params, cookies }) {
 
     // Alle Kommentare zu diesem Bild laden
     const [comments] = await pool.execute(
-        `SELECT comments.id, c
-        omments.text, comments.created_at, users.username
+        `SELECT comments.id, comments.text, comments.created_at, users.username
          FROM comments
          JOIN users ON comments.user_id = users.id
          WHERE comments.image_id = ?
@@ -71,5 +70,25 @@ export async function load({ params, cookies }) {
 
         return { success: true };
     },
+
+        // Kommentar hinzufügen
+    comment: async ({ params, request, cookies }) => {
+        const sessionId = cookies.get('session');
+        const user = await validateSession(sessionId);
+
+        if (!user) return fail(401, { error: 'Bitte einloggen um zu kommentieren.' });
+
+        const form = await request.formData();
+        const text = form.get('text')?.toString().trim();
+
+        if (!text) return fail(400, { error: 'Kommentar darf nicht leer sein.' });
+
+        await pool.execute(
+            'INSERT INTO comments (image_id, user_id, text) VALUES (?, ?, ?)',
+            [params.id, user.id, text]
+        );
+
+        return { success: true };
+    }
 
 };
