@@ -61,5 +61,47 @@
                 </button>
             </form>
         </div>
+
+        <!-- Meine Bilder -->
+        <h2 class="font-bold text-slate-600 text-xs uppercase tracking-widest mb-3">
+            Meine Uploads ({data.images.length})
+        </h2>
+
+        {#if data.images.length === 0}
+            <div class="bg-white rounded-2xl border border-slate-200 text-center py-14">
+                <p class="text-slate-400 text-sm">Noch keine Bilder hochgeladen.</p>
+            </div>
+        {:else}
+            <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                {#each data.images as image (image.id)}
+                    <div class="relative group">
+                        <!-- Bild-Vorschau -->
+                        <a href="/image/{image.id}">
+                            <img src={image.image}
+                                 alt={image.description ?? 'Bild'}
+                                 class="w-full aspect-square object-cover rounded-xl bg-slate-200" />
+                        </a>
+
+                        <!-- Löschen-Button erscheint beim Hover -->
+                        <form action="?/delete" method="POST"
+                              class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <input type="hidden" name="imageId" value={image.id} />
+                            <button type="submit"
+                                    onclick={(e) => { if (!confirm('Bild wirklich löschen?')) e.preventDefault(); }}
+                                    class="bg-red-500 hover:bg-red-600 text-white text-xs
+                                           font-bold px-2.5 py-1 rounded-lg shadow transition-colors">
+                                Löschen
+                            </button>
+                        </form>
+
+                        <!-- Vote-Zähler -->
+                        <div class="absolute bottom-2 left-2 bg-black/50 text-white text-xs
+                                    font-semibold px-2 py-0.5 rounded-full">
+                            ▲ {image.votes}
+                        </div>
+                    </div>
+                {/each}
+            </div>
+        {/if}
     </div>
 </div>
