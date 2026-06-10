@@ -54,4 +54,31 @@ export const actions = {
         return { success: true };
     },
 
+    // Bild löschen — Sicherheitscheck: nur eigene Bilder!
+    delete: async ({ request, cookies }) => {
+        const sessionId = cookies.get('session');
+        const user = await validateSession(sessionId);
+        if (!user) throw redirect(303, '/login');
+
+        const formData = await request.formData();
+        const imageId = formData.get('imageId');
+
+        // Prüfen ob das Bild dem eingeloggten User gehört
+        const [rows] = await pool.execute(
+            'SELECT image, author_id FROM images WHERE id = ?',
+            [imageId]
+        );
+
+        if (rows.length === 0 || rows[0].author_id !== user.id) {
+            return fail(403, { error: 'Keine Berechtigung.' });
+        }
+
+        // Aus Vercel Blob löschen
+        await del(rows[0].image, { token: BLOB_READ_WRITE_TOKEN });
+
+        // Aus DB löschen (Kommentare + Votes via CASCADE automatisch gelöscht)
+        await pool.execute('DELETE FROM images WHERE id = ?', [imageId]);
+
+        return { success: true };
+    }
 };
