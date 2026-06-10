@@ -120,13 +120,72 @@
                         </span>
                     {:else}
                         <a href="/login"
-                           class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200
-                                  text-slate-600 px-4 py-2 rounded-lg text-sm transition-colors">
-                            ▲ Login zum Voten
-                        </a>
+                            class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200
+                                    text-slate-600 px-4 py-2 rounded-lg text-sm transition-colors">
+                                ▲ Login zum Voten
+                            </a>
+                        {/if}
+
+                        <span class="text-indigo-600 font-bold text-base">
+                            {data.image.votes} Votes
+                        </span>
+                    </div>
+
+                    {#if form?.error}
+                        <p class="text-rose-500 text-xs mt-2">{form.error}</p>
                     {/if}
                 </div>
             </div>
+
+            <!-- Kommentare -->
+            <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5">
+                <h2 class="font-bold text-slate-800 text-sm mb-4">
+                    Kommentare ({data.comments.length})
+                </h2>
+
+                    <!-- Kommentar-Formular -->
+                    {#if data.user}
+                        <form action="?/comment" method="POST" class="flex gap-2 mb-5">
+                            <input type="text"
+                                name="text"
+                                placeholder="Kommentar schreiben..."
+                                class="flex-1 border border-slate-200 rounded-lg px-3 py-2.5 text-sm
+                                        text-slate-800 focus:outline-none focus:border-indigo-400
+                                        focus:ring-1 focus:ring-indigo-400 transition-all"
+                                required />
+                            <button type="submit"
+                                    class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold
+                                        px-4 py-2 rounded-lg transition-colors text-sm">
+                                Senden
+                            </button>
+                        </form>
+                    {:else}
+                        <p class="text-slate-400 text-xs mb-5">
+                            <a href="/login" class="text-indigo-600 hover:underline">Einloggen</a> um zu kommentieren.
+                        </p>
+                    {/if}
+
+                    <!-- Kommentar-Liste -->
+                    {#if data.comments.length === 0}
+                            <p class="text-slate-400 text-xs">Noch keine Kommentare.</p>
+                        {:else}
+                            <div class="space-y-3">
+                                {#each data.comments as comment (comment.id)}
+                                    <div class="border-b border-slate-100 pb-3 last:border-0">
+                                        <div class="flex items-center justify-between mb-1">
+                                            <a href="/profile/{comment.username}"
+                                            class="font-semibold text-indigo-600 text-xs hover:underline">
+                                                @{comment.username}
+                                            </a>
+                                            <span class="text-slate-300 text-xs">
+                                                {new Date(comment.created_at).toLocaleDateString('de-AT')}
+                                            </span>
+                                        </div>
+                                <p class="text-slate-600 text-sm">{comment.text}</p>
+                        </div>
+                    {/each}
+                </div>
+            {/if}
         </div>
     </div>
 </div>
