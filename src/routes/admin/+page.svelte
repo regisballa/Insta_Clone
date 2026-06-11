@@ -79,7 +79,7 @@
                                 </td>
                                 <td class="px-5 py-3">
                                     <span class="px-2 py-0.5 rounded-full text-xs font-semibold
-                                                 {u.role === 'admin' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-600'}">
+                                        {u.role === 'admin' ? 'bg-indigo-100 text-indigo-700' : 'bg-slate-100 text-slate-600'}">
                                         {u.role ?? 'user'}
                                     </span>
                                 </td>
@@ -104,6 +104,36 @@
                         {/each}
                     </tbody>
                 </table>
+            </div>
+
+        <!-- Bilder-Grid -->
+        {:else}
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                {#each data.images as image (image.id)}
+                    <div class="relative group bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+                        <a href="/image/{image.id}">
+                            <img src={image.image}
+                                 alt={image.description ?? 'Bild'}
+                                 class="w-full aspect-square object-cover" />
+                        </a>
+                        <!-- Info -->
+                        <div class="p-2">
+                            <p class="text-xs text-slate-500 truncate">@{image.username}</p>
+                            <p class="text-xs text-indigo-600 font-semibold">▲ {image.votes}</p>
+                        </div>
+                        <!-- Löschen-Button -->
+                        <form action="?/deleteImage" method="POST"
+                              class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                            <input type="hidden" name="id" value={image.id} />
+                            <button type="submit"
+                                    onclick={(e) => { if (!confirm('Bild wirklich löschen?')) e.preventDefault(); }}
+                                    class="bg-red-500 hover:bg-red-600 text-white text-xs
+                                           font-bold px-2 py-1 rounded-lg shadow transition-colors">
+                                x
+                            </button>
+                        </form>
+                    </div>
+                {/each}
             </div>
         {/if}    
     </div>
