@@ -30,4 +30,46 @@ export async function load({ cookies }) {
     );
 
     return { user, users, images };
+}
+
+    export const actions = {
+    // User löschen
+    deleteUser: async ({ request, cookies }) => {
+        const sessionId = cookies.get('session');
+        const user = await validateSession(sessionId);
+        if (!user || user.role !== 'admin') throw error(403, 'Kein Zugriff');
+
+        const formData = await request.formData();
+        const id = formData.get('id');
+
+        // Admin kann sich nicht selbst löschen
+        if (parseInt(id) === user.id) {
+            return fail(400, { error: 'Du kannst dich nicht selbst löschen.' });
+        }
+
+        await pool.execute('DELETE FROM users WHERE id = ?', [id]);
+        return { success: true };
+    },
+
+    // Bild löschen (Admin kann alle Bilder löschen)
+    deleteImage: async ({ request, cookies }) => {
+        const sessionId = cookies.get('session');
+        const user = await validateSession(sessionId);
+        if (!user || user.role !== 'admin') throw error(403, 'Kein Zugriff');
+
+        const formData = await request.formData();
+        const id = formData.get('id');
+
+        // Blob-URL holen um aus Vercel Blob zu löschen
+        const [rows] = await pool.execute(
+            'SELECT image FROM images WHERE id = ?', [id]
+        );
+
+        if (rows.length > 0) {
+            await del(rows[0].image, { token: BLOB_READ_WRITE_TOKEN });
+        }
+
+        await pool.execute('DELETE FROM images WHERE id = ?', [id]);
+        return { success: true };
+    }
 };
