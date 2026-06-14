@@ -35,7 +35,7 @@
                         <!-- Hover-Overlay mit Vote-Anzahl -->
                         <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100
                                     transition-opacity duration-200 flex items-end p-3">
-                            <span class="text-amber-300 text-xs font-bold">▲ {image.votes}</span>
+                            <span class="text-amber-300 text-xs font-bold">❤️ {image.votes}</span>
                         </div>
                     </a>
                 {/each}

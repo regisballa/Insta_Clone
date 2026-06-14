@@ -119,7 +119,7 @@
                                     <div class="flex items-center justify-between">
                                         <span class="text-white/70 text-xs">@{image.username}</span>
                                         <span class="text-amber-300 text-xs font-bold bg-black/30 px-2 py-0.5 rounded-full">
-                                            ▲ {image.votes}
+                                            ❤️ {image.votes}
                                         </span>
                                     </div>
                                 </div>
@@ -162,7 +162,7 @@
                                     {/if}
                                     <div class="flex items-center justify-between">
                                         <span class="text-white/70 text-xs">@{image.username}</span>
-                                        <span class="text-amber-300 text-xs font-bold">▲ {image.votes}</span>
+                                        <span class="text-amber-300 text-xs font-bold"> ❤️ {image.votes}</span>
                                     </div>
                                 </div>
                             </a>

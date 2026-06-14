@@ -110,19 +110,19 @@
                             <button type="submit"
                                     class="flex items-center gap-1.5 bg-indigo-600 hover:bg-indigo-700
                                            text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm">
-                                ▲ Upvote
+                                ❤️ Upvote
                             </button>
                         </form>
                     {:else if data.hasVoted}
                         <span class="flex items-center gap-1.5 bg-slate-100 text-slate-500
                                      px-4 py-2 rounded-lg text-sm">
-                            ▲ Bereits gevoted
+                            ❤️ Bereits gevoted
                         </span>
                     {:else}
                         <a href="/login"
                             class="flex items-center gap-1.5 bg-slate-100 hover:bg-slate-200
                                     text-slate-600 px-4 py-2 rounded-lg text-sm transition-colors">
-                                ▲ Login zum Voten
+                                ❤️ Login zum Voten
                             </a>
                         {/if}
 
