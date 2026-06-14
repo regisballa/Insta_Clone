@@ -97,7 +97,7 @@
                         <!-- Vote-Zähler -->
                         <div class="absolute bottom-2 left-2 bg-black/50 text-white text-xs
                                     font-semibold px-2 py-0.5 rounded-full">
-                            ▲ {image.votes}
+                            ❤️ {image.votes}
                         </div>
                     </div>
                 {/each}

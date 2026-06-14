@@ -119,7 +119,7 @@
                         <!-- Info -->
                         <div class="p-2">
                             <p class="text-xs text-slate-500 truncate">@{image.username}</p>
-                            <p class="text-xs text-indigo-600 font-semibold">▲ {image.votes}</p>
+                            <p class="text-xs text-indigo-600 font-semibold">❤️ {image.votes}</p>
                         </div>
                         <!-- Löschen-Button -->
                         <form action="?/deleteImage" method="POST"
