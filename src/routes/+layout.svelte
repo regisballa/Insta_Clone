@@ -89,4 +89,55 @@
         <main class="flex-1">
             {@render children()}
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-white border-t border-slate-100 mt-auto">
+            <div class="max-w-5xl mx-auto px-4 py-10">
+
+                <div class="flex flex-col sm:flex-row justify-between gap-8">
+
+                    <!-- Branding -->
+                    <div>
+                        <a href="/" class="font-extrabold text-slate-900 text-lg tracking-tight hover:text-indigo-600 transition-colors">
+                            SharePics
+                        </a>
+                        <p class="text-slate-400 text-sm mt-2 max-w-xs">
+                            Share your best moments with the world. Upload, discover and vote for your favorite photos.
+                        </p>
+                    </div>
+
+                    <!-- Links -->
+                    <div class="flex gap-12">
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Explore</p>
+                            <ul class="space-y-2">
+                                <li><a href="/" class="text-sm text-slate-500 hover:text-slate-900 transition-colors">Home</a></li>
+                                <li><a href="/register" class="text-sm text-slate-500 hover:text-slate-900 transition-colors">Register</a></li>
+                                <li><a href="/login" class="text-sm text-slate-500 hover:text-slate-900 transition-colors">Login</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-3">Account</p>
+                            <ul class="space-y-2">
+                                <li><a href="/admin/upload" class="text-sm text-slate-500 hover:text-slate-900 transition-colors">Upload</a></li>
+                                {#if data.user}
+                                    <li>
+                                        <a href="/profile/{data.user.username}"
+                                        class="text-sm text-slate-500 hover:text-slate-900 transition-colors">
+                                            My Profile
+                                        </a>
+                                    </li>
+                                {/if}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bottom bar -->
+                <div class="border-t border-slate-100 mt-8 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p class="text-slate-400 text-xs">© 2026 SharePics. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
 </div>
