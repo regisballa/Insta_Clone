@@ -1,42 +1,36 @@
-# sv
+# SharePics
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A photo sharing app built with SvelteKit, Tailwind CSS and MySQL.
 
-## Creating a project
+## Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+- Upload and share photos
+- Vote and comment on images
+- CSS filters on image detail page
+- User profiles and admin panel
+- Responsive design
 
-```sh
-# create a new project
-npx sv create my-app
-```
+## Tech Stack
 
-To recreate this project with the same configuration:
+- SvelteKit 5, Tailwind CSS
+- MySQL, Vercel Blob
+- Deployed on Vercel
 
-```sh
-# recreate this project
-npx sv@0.15.3 create --template minimal --no-types --add prettier eslint tailwindcss="plugins:typography,forms" --install npm .
-```
+## Setup
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```sh
+```bash
+git clone https://github.com/regisballa/Insta_Clone.git
+cd Insta_Clone
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
-
-```sh
-npm run build
+Create a `.env` file:
 ```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+DB_HOST=your_host
+DB_PORT=your_port
+DB_NAME=your_database
+DB_USER=your_user
+DB_PASSWORD=your_password
+BLOB_READ_WRITE_TOKEN=your_token
+```
