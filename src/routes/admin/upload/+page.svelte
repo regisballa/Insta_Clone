@@ -84,7 +84,7 @@
 
                         <!-- Löschen-Button erscheint beim Hover -->
                         <form action="?/delete" method="POST"
-                              class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                              class="absolute top-2 right-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                             <input type="hidden" name="imageId" value={image.id} />
                             <button type="submit"
                                     onclick={(e) => { if (!confirm('Bild wirklich löschen?')) e.preventDefault(); }}
