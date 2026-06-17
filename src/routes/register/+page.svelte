@@ -96,13 +96,13 @@
                 type="submit"
                 class="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg text-base transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
             >
-                Sign Up
+                Registrieren
             </button>
         </form>
 
         <p class="text-slate-500 text-sm text-center mt-6 relative z-10">
-            Already have an account?
-            <a href="/login" class="text-indigo-600 font-bold hover:underline ml-1">Sign in</a>
+            Sie haben bereits ein Konto?
+            <a href="/login" class="text-indigo-600 font-bold hover:underline ml-1">Einloggen</a>
         </p>
     </div>
 </div>

@@ -9,8 +9,8 @@
     <div class="relative bg-white px-8 py-12 sm:px-10 w-full max-w-[450px] rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
 
         <div class="relative z-10 mb-10">
-            <p class="text-slate-400 text-sm font-medium">Please enter your details</p>
-            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Welcome Back</h1>
+            <p class="text-slate-400 text-sm font-medium">Bitte geben Sie Ihre Daten ein</p>
+            <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight mt-1">Willkommen zurück</h1>
         </div>
 
         {#if form?.error}
@@ -85,13 +85,13 @@
                 type="submit" 
                 class="w-full h-12 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-lg text-base transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
             >
-                Sign In
+                Anmelden
             </button>
         </form>
 
         <p class="text-slate-500 text-sm text-center mt-6 relative z-10">
-            Don't have an account? 
-            <a href="/register" class="text-indigo-600 font-bold hover:underline ml-1">Sign up</a>
+            Sie haben noch kein Konto?
+            <a href="/register" class="text-indigo-600 font-bold hover:underline ml-1">Jetzt registrieren!</a>
         </p>
     </div>
 </div>
